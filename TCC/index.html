@@ -13,7 +13,45 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a","950":"#172554"}
+                        primary: {
+                            "50": "#f5f3ff",
+                            "100": "#ede9fe",
+                            "200": "#ddd6fe",
+                            "300": "#c4b5fd",
+                            "400": "#a78bfa",
+                            "500": "#8b5cf6",
+                            "600": "#7c3aed",
+                            "700": "#6d28d9",
+                            "800": "#5b21b6",
+                            "900": "#4c1d95",
+                            "950": "#2e1065"
+                        },
+                        secondary: {
+                            "50": "#eff6ff",
+                            "100": "#dbeafe",
+                            "200": "#bfdbfe",
+                            "300": "#93c5fd",
+                            "400": "#60a5fa",
+                            "500": "#3b82f6",
+                            "600": "#2563eb",
+                            "700": "#1d4ed8",
+                            "800": "#1e40af",
+                            "900": "#1e3a8a",
+                            "950": "#172554"
+                        },
+                        accent: {
+                            "50": "#fdf2f8",
+                            "100": "#fce7f3",
+                            "200": "#fbcfe8",
+                            "300": "#f9a8d4",
+                            "400": "#f472b6",
+                            "500": "#ec4899",
+                            "600": "#db2777",
+                            "700": "#be185d",
+                            "800": "#9d174d",
+                            "900": "#831843",
+                            "950": "#500724"
+                        }
                     }
                 }
             }
@@ -37,7 +75,7 @@
                         <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
                 </svg>
             </button>
-                <a href="#contato" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Comece Agora</a>
+                <a href="cadastro.html" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-primary-500 dark:hover:bg-primary-600 dark:focus:ring-primary-800">Comece Agora</a>
             </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -61,44 +99,39 @@
         </div>
     </nav>
 
-    <section id="inicio" class="pt-32 bg-white dark:bg-gray-900">
+    <section id="inicio" class="pt-32 bg-gradient-to-b from-primary-50 via-secondary-50 to-accent-50 dark:from-gray-900 dark:to-gray-800">
         <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
             <div class="mr-auto place-self-center lg:col-span-7">
-                <h1
-                    class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+                <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white text-gray-800">
                     Aprenda Física de Forma Divertida</h1>
-                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                <p class="max-w-2xl mb-6 font-light text-gray-600 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                     Embarque em uma jornada fascinante pelo mundo da física com Amélia e Isaac Newton. 
                     Juntos, eles tornarão o aprendizado da cinemática uma experiência única e envolvente!</p>
-                <a href="#personagens"
-                    class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                <a href="#personagens" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-xl bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
                     Conhecer os Personagens
-                    <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>
                 </a>
             </div>
-            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="img/fisica.png" alt="Ilustração de física" class="!w-5xl h-fit">
+            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex transform transition-all duration-500 hover:scale-105">
+                <img src="img/banner.png" alt="Ilustração de física" class="w-full h-auto object-contain rounded-2xl shadow-2xl">
             </div>
         </div>
     </section>
 
-    <section id="personagens" class="bg-gray-50 dark:bg-gray-800 py-16 scroll-mt-16">
+    <section id="personagens" class="bg-gradient-to-b from-accent-50 via-primary-50 to-secondary-50 dark:from-gray-800 dark:to-gray-900 py-16 scroll-mt-16">
         <div class="max-w-screen-xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 dark:text-white">Conheça Nossos Personagens</h2>
+            <h2 class="text-4xl font-bold text-center mb-12 dark:text-white text-gray-800">Conheça Nossos Personagens</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <!-- Amélia -->
-                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
                     <div class="md:flex">
                         <div class="md:w-1/2">
                             <img src="img/amelia.jpg" alt="Amélia" class="w-full h-full object-cover">
                         </div>
-                        <div class="p-6 md:w-1/2">
-                            <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Amélia</h3>
+                        <div class="p-8 md:w-1/2">
+                            <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Amélia</h3>
                             <p class="text-gray-600 dark:text-gray-300">
                                 Uma jovem estudante curiosa e determinada que adora desvendar os mistérios da física. 
                                 Com sua inteligência e perseverança, ela transforma conceitos complexos em aventuras emocionantes.
@@ -108,13 +141,13 @@
                 </div>
 
                 <!-- Isaac Newton -->
-                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
                     <div class="md:flex">
                         <div class="md:w-1/2">
                             <img src="img/newton.jpg" alt="Isaac Newton" class="w-full h-full object-cover">
                         </div>
-                        <div class="p-6 md:w-1/2">
-                            <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Isaac Newton</h3>
+                        <div class="p-8 md:w-1/2">
+                            <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Isaac Newton</h3>
                             <p class="text-gray-600 dark:text-gray-300">
                                 O famoso físico que, de forma divertida e amigável, guia Amélia através das leis da física. 
                                 Com sua sabedoria e experiência, ele torna o aprendizado uma jornada fascinante.
@@ -125,87 +158,77 @@
             </div>
 
             <div class="mt-12 text-center">
-                <p class="text-gray-600 dark:text-gray-300 mb-8">
+                <p class="text-gray-600 dark:text-gray-300 mb-8 text-lg">
                     Junte-se a Amélia e Isaac Newton nesta incrível jornada pelo mundo da física!
                 </p>
-                <a href="#hq" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                <a href="#hq" class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white rounded-xl bg-accent-600 hover:bg-accent-700 focus:ring-4 focus:ring-accent-300 dark:focus:ring-accent-900 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
                     Começar a Aventura
-                    <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="aprender" class="bg-white dark:bg-gray-900 py-16 scroll-mt-16">
+    <section id="aprender" class="bg-gradient-to-b from-secondary-50 via-accent-50 to-primary-50 dark:from-gray-900 dark:to-gray-800 py-16 scroll-mt-16">
         <div class="max-w-screen-xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 dark:text-white">O que você vai aprender</h2>
+            <h2 class="text-4xl font-bold text-center mb-12 dark:text-white text-gray-800">O que você vai aprender</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
-                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                        <h3 class="text-xl font-bold mb-2 dark:text-white">Movimento Retilíneo Uniforme</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Compreenda como os objetos se movem em linha reta com velocidade constante.</p>
-                        <a href="cadastro.html" class="inline-flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 dark:text-white text-gray-800">Movimento Retilíneo Uniforme</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">Compreenda como os objetos se movem em linha reta com velocidade constante.</p>
+                        <a href="porque-aprender.html" class="inline-flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 text-lg">
                             Ler mais
-                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                             </svg>
                         </a>
                     </div>
-                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                        <h3 class="text-xl font-bold mb-2 dark:text-white">Aceleração</h3>
-                        <p class="text-gray-600 dark:text-gray-300">Descubra como a velocidade dos objetos muda ao longo do tempo.</p>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                        <h3 class="text-xl font-bold mb-2 dark:text-white">Queda Livre</h3>
-                        <p class="text-gray-600 dark:text-gray-300">Explore como os objetos caem sob a influência da gravidade.</p>
-                    </div>
                 </div>
-                <div class="text-center">
-                    <img src="img/fisica-conceitos.png" alt="Conceitos de Física" class="mx-auto rounded-lg shadow-lg">
-                </div>
-                </div>
+               
             </div>
+        </div>
     </section>
 
-    <section id="hq" class="bg-gray-50 dark:bg-gray-800 py-16 scroll-mt-16">
+    <section id="hq" class="bg-gradient-to-b from-primary-50 via-secondary-50 to-accent-50 dark:from-gray-800 dark:to-gray-900 py-16 scroll-mt-16">
         <div class="max-w-screen-xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 dark:text-white">Nossa HQ Educacional</h2>
-            <div class="bg-white dark:bg-gray-700 rounded-lg shadow-xl overflow-hidden">
+            <h2 class="text-4xl font-bold text-center mb-12 dark:text-white text-gray-800">Nossa HQ Educacional</h2>
+            <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
                 <div class="md:flex">
                     <div class="md:w-1/2">
-                        <img src="img/hq-preview.png" alt="Preview da HQ" class="w-full h-96 object-cover">
+                        <img src="img/capa.png" alt="Preview da HQ" class="w-full h-auto object-contain">
                     </div>
                     <div class="p-8 md:w-1/2">
                         <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Física em Quadrinhos: Volume 1</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">
                             Acompanhe as aventuras de Amélia e Newton enquanto exploram os conceitos fundamentais da cinemática. 
                             Uma maneira divertida e envolvente de aprender física!
                         </p>
                         <div class="space-y-4">
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <a href="acesso.html" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                                <a href="acesso.html" class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-center text-white rounded-xl bg-secondary-600 hover:bg-secondary-700 focus:ring-4 focus:ring-secondary-300 dark:focus:ring-secondary-900 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
                                     Ler Online
-                                    <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                                     </svg>
                                 </a>
-                                <a href="acesso.html" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                                <a href="acesso.html" class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-center text-gray-900 rounded-xl border border-primary-300 hover:bg-primary-100 focus:ring-4 focus:ring-primary-100 dark:text-white dark:border-primary-700 dark:hover:bg-primary-700 dark:focus:ring-primary-800 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
                                     Baixar PDF
-                                    <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path>
+                                    <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                     </svg>
                                 </a>
                             </div>
                         </div>
                     </div>
-    </div>
-    </div>
-    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="equipe" class="bg-gray-50 dark:bg-gray-800 py-16 scroll-mt-16">
+    <section id="equipe" class="bg-gradient-to-b from-accent-50 via-primary-50 to-secondary-50 dark:from-gray-800 dark:to-gray-900 py-16 scroll-mt-16">
         <div class="max-w-screen-xl mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 dark:text-white">Integrantes do Projeto</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -246,7 +269,7 @@
         </div>
     </section>
 
-    <section id="contato" class="bg-white dark:bg-gray-900 py-16 scroll-mt-16">
+    <section id="contato" class="bg-gradient-to-b from-secondary-50 via-accent-50 to-primary-50 dark:from-gray-900 dark:to-gray-800 py-16 scroll-mt-16">
         <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Entre em Contato</h2>
             <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Pronto para começar sua jornada na física? Entre em contato conosco!</p>
@@ -263,12 +286,12 @@
                     <label for="mensagem" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mensagem</label>
                     <textarea id="mensagem" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required></textarea>
                     </div>
-                <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800 w-full">Enviar mensagem</button>
+                <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-accent-600 hover:bg-accent-700 focus:ring-4 focus:outline-none focus:ring-accent-300 dark:bg-accent-500 dark:hover:bg-accent-600 dark:focus:ring-accent-800 w-full">Enviar mensagem</button>
             </form>
                 </div>
     </section>
 
-    <footer class="bg-gray-50 dark:bg-gray-800">
+    <footer class="bg-gradient-to-b from-primary-50 via-secondary-50 to-accent-50 dark:from-gray-800 dark:to-gray-900">
         <div class="max-w-screen-xl mx-auto px-4 py-8 md:py-16">
             <div class="text-center text-gray-600 dark:text-gray-400">
                 <div class="mb-6 flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
