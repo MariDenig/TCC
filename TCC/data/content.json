@@ -1,0 +1,61 @@
+{
+  "inicio": {
+    "titulo": "Aprenda Física de Forma Divertida",
+    "descricao": "Embarque em uma jornada fascinante pelo mundo da física com Amélia e Isaac Newton. Juntos, eles tornarão o aprendizado da cinemática uma experiência única e envolvente!",
+    "imagemBanner": "img/banner.png"
+  },
+  "personagens": [
+    {
+      "id": "amelia",
+      "nome": "Amélia",
+      "descricao": "Uma jovem estudante curiosa e determinada que adora desvendar os mistérios da física. Com sua inteligência e perseverança, ela transforma conceitos complexos em aventuras emocionantes.",
+      "imagem": "img/amelia.jpg"
+    },
+    {
+      "id": "newton",
+      "nome": "Isaac Newton",
+      "descricao": "O famoso físico que, de forma divertida e amigável, guia Amélia através das leis da física. Com sua sabedoria e experiência, ele torna o aprendizado uma jornada fascinante.",
+      "imagem": "img/newton.jpg"
+    }
+  ],
+  "aprender": {
+    "titulo": "O que você vai aprender",
+    "topics": [
+      {
+        "id": "mru",
+        "titulo": "Movimento Retilíneo Uniforme",
+        "descricao": "Compreenda como os objetos se movem em linha reta com velocidade constante.",
+        "link": "porque-aprender.html"
+      }
+    ]
+  },
+  "hq": {
+    "titulo": "Nossa HQ Educacional",
+    "subtitulo": "Física em Quadrinhos: Volume 1",
+    "descricao": "Acompanhe as aventuras de Amélia e Newton enquanto exploram os conceitos fundamentais da cinemática. Uma maneira divertida e envolvente de aprender física!",
+    "imagemCapa": "img/capa.png"
+  },
+  "equipe": [
+    {
+      "nome": "Mariani Denig",
+      "funcao": "Conteúdo, pesquisa e desenvolvimento web",
+      "imagem": "img/mariani.jpg",
+      "instagram": "https://www.instagram.com/marianidenig/",
+      "instagramUser": "@marianidenig"
+    },
+    {
+      "nome": "Isabela Castro",
+      "funcao": "Desenvolvimento Web, Design e pesquisa",
+      "imagem": "img/isabela.jpg",
+      "instagram": "https://www.instagram.com/isabelacastro/",
+      "instagramUser": "@isabelacastro"
+    },
+    {
+      "nome": "Maria Eduarda Sagava",
+      "funcao": "Arte e Ilustração",
+      "imagem": "img/criadora1.jpg",
+      "instagram": "https://www.instagram.com/mariaeduardasagava/",
+      "instagramUser": "@mariaeduardasagava"
+    }
+  ]
+} 

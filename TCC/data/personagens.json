@@ -1,0 +1,16 @@
+{
+    "personagens": [
+        {
+            "id": 1,
+            "nome": "Amélia",
+            "descricao": "Uma jovem curiosa e inteligente que adora explorar o mundo da física.",
+            "imagem": "img/amelia.jpg"
+        },
+        {
+            "id": 2,
+            "nome": "Newton",
+            "descricao": "Um gato muito esperto que sempre acompanha Amélia em suas aventuras.",
+            "imagem": "img/newton.jpg"
+        }
+    ]
+} 
