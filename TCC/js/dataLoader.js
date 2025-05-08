@@ -1,19 +1,20 @@
-// Função para carregar o conteúdo do JSON
-async function loadContent() {
+ // Função genérica para buscar dados da API
+ async function fetchData(url) {
     try {
-        const response = await fetch('../data/content.json');
+        const response = await fetch(url);
         if (!response.ok) {
-            throw new Error('Erro ao carregar o conteúdo');
+            throw new Error(`Erro ao buscar dados de ${url}: ${response.status}`);
         }
         return await response.json();
     } catch (error) {
-        console.error('Erro:', error);
+        console.error(`Erro ao buscar dados de ${url}:`, error);
         return null;
     }
 }
 
 // Função para preencher a seção de início
-function fillInicioSection(data) {
+async function fillInicioSection() {
+    const data = await fetchData('http://localhost:3000/content'); // Ajuste a URL se necessário
     if (!data || !data.inicio) return;
 
     const tituloInicio = document.getElementById('titulo-inicio');
@@ -26,13 +27,14 @@ function fillInicioSection(data) {
 }
 
 // Função para preencher a seção de personagens
-function fillPersonagensSection(data) {
-    if (!data || !data.personagens) return;
+async function fillPersonagensSection() {
+    const data = await fetchData('http://localhost:3000/personagens'); // Ajuste a URL se necessário
+    if (!data) return;
 
     const container = document.getElementById('personagens-container');
     if (!container) return;
 
-    container.innerHTML = data.personagens.map(personagem => `
+    container.innerHTML = data.map(personagem => `
         <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
             <div class="flex flex-col md:flex-row items-center gap-8">
                 <div class="md:w-1/3">
@@ -54,7 +56,8 @@ function fillPersonagensSection(data) {
 }
 
 // Função para preencher a seção da HQ
-function fillHQSection(data) {
+async function fillHQSection() {
+    const data = await fetchData('http://localhost:3000/hq'); // Ajuste a URL se necessário
     if (!data || !data.hq) return;
 
     const tituloHQ = document.getElementById('titulo-hq');
@@ -68,8 +71,9 @@ function fillHQSection(data) {
     if (capaHQ) capaHQ.src = data.hq.capa;
 }
 
-// Função para preencher a seção da equipe
-function fillEquipeSection(data) {
+// Função para preencher a seção da equipe (adaptar se necessário)
+async function fillEquipeSection() {
+    const data = await fetchData('http://localhost:3000/content'); // Assumindo que os dados da equipe estão no 'content'
     if (!data || !data.equipe) return;
 
     const container = document.getElementById('equipe-container');
@@ -78,8 +82,8 @@ function fillEquipeSection(data) {
     container.innerHTML = data.equipe.map(membro => `
         <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl">
             <div class="flex flex-col items-center text-center">
-                <img src="${membro.foto}" alt="${membro.nome}" class="w-32 h-32 rounded-full mb-4 object-cover shadow-lg">
-                <h3 class="text-xl font-bold mb-2 dark:text-white text-gray-800">${membro.nome}</h3>
+                <img src="${membro.imagem}" alt="${membro.nome}" class="w-32 h-32 rounded-full mb-4 object-cover shadow-lg">
+       <h3 class="text-xl font-bold mb-2 dark:text-white text-gray-800">${membro.nome}</h3>
                 <p class="text-gray-600 dark:text-gray-300 mb-4">${membro.funcao}</p>
                 <div class="flex space-x-4">
                     ${membro.redes.map(rede => `
@@ -97,14 +101,13 @@ function fillEquipeSection(data) {
 
 // Função para inicializar o conteúdo
 async function initializeContent() {
-    const data = await loadContent();
-    if (data) {
-        fillInicioSection(data);
-        fillPersonagensSection(data);
-        fillHQSection(data);
-        fillEquipeSection(data);
-    }
+    await Promise.all([ // Carrega os dados em paralelo
+        fillInicioSection(),
+        fillPersonagensSection(),
+        fillHQSection(),
+        fillEquipeSection()
+    ]);
 }
 
 // Inicializar o conteúdo quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', initializeContent); 
+document.addEventListener('DOMContentLoaded', initializeContent);
