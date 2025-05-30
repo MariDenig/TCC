@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const { ObjectId } = require('mongodb'); 
 
 const dbPath = path.resolve(__dirname, './db.js'); // Caminho absoluto para db.js
 
@@ -7,6 +8,8 @@ if (fs.existsSync(dbPath)) {
     var { getDb } = require('./db');
 } else if (fs.existsSync(path.resolve(__dirname, './js/db.js'))) {
     var { getDb } = require('./js/db');
+} else { 
+  var { getDb } = require('../js/db');   
 }
 
 const COLLECTION_NAME = 'personagens';

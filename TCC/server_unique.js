@@ -348,11 +348,13 @@ module.exports = router;
 const app = express();
 const port = process.env.PORT || 3000;
 
+ 
+
 // Middlewares
 app.use(cors());       // Habilita o CORS para todas as origens
 app.use(express.json()); // Para parsear JSON no corpo das requisições (req.body)
 app.use(express.urlencoded({ extended: true })); // Para parsear dados de formulários URL-encoded
-
+app.use(router);
 // Servir arquivos estáticos da pasta 'public' (para seu frontend)
 app.use(express.static('public'));
 

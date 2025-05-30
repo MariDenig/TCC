@@ -7,7 +7,10 @@ if (fs.existsSync(dbPath)) {
     var { getDb } = require('./db');
 } else if (fs.existsSync(path.resolve(__dirname, './js/db.js'))) {
     var { getDb } = require('./js/db');
+}else { 
+  var { getDb } = require('../js/db');   
 }
+
 
 
 const COLLECTION_NAME = 'content'; // Coleção para armazenar o documento de conteúdo único
