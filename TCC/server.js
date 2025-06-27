@@ -4,12 +4,12 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const { connectToDatabase, getDb } = require('./js/db.js'); // Importa a conexão
+const { connectToDatabase, getDb } = require('./middleware/js/db.js'); // Importa a conexão
 // Importar as rotas
 const personagemRoutes = require('./routes/personagem.routes');
-const contentRoutes = require('./routes/content.routes');
-const hqRoutes = require('./routes/hq.routes');
-const pageRoutes = require('./routes/page.routes');
+const contentRoutes = require('./routes/content.route');
+const hqRoutes = require('./routes/hq.route');
+const pageRoutes = require('./routes/pages.route');
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 
