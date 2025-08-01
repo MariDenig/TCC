@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administração - Física Divertida</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      if (tailwind != undefined) {
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                primary: {
+                  50: "#f5f3ff",
+                  100: "#ede9fe",
+                  200: "#ddd6fe",
+                  300: "#c4b5fd",
+                  400: "#a78bfa",
+                  500: "#8b5cf6",
+                  600: "#7c3aed",
+                  700: "#6d28d9",
+                  800: "#5b21b6",
+                  900: "#4c1d95",
+                  950: "#2e1065",
+                },
+              },
+            },
+          },
+        };
+      } else {
+        console.error("Tailwind CSS não está carregado corretamente.");
+      }
+    </script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <nav
+      class="fixed w-full z-20 top-0 start-0 bg-white border-gray-200 dark:bg-gray-900"
+    >
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+      >
+        <a href="index.html" class="flex items-center space-x-3">
+          <img
+            src="img/logopng.png"
+            class="h-12"
+            alt="Física Divertida Logo"
+          />
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+            >Física Divertida</span
+          >
+        </a>
+      </div>
+    </nav>
+
+    <div class="pt-24 px-4 mx-auto max-w-screen-xl">
+      <div id="mensagem-container" class="mb-8"></div>
+
+      <!-- Seção de Personagens -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold mb-6 dark:text-white">
+          Gerenciar Personagens
+        </h2>
+
+        <!-- Formulário de Criação -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
+          <h3 class="text-xl font-bold mb-4 dark:text-white">
+            Adicionar Novo Personagem
+          </h3>
+          <form id="form-criacao" class="space-y-4">
+            <div>
+              <label
+                for="nome"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Nome</label
+              >
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              />
+            </div>
+            <div>
+              <label
+                for="descricao"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Descrição</label
+              >
+              <textarea
+                id="descricao"
+                name="descricao"
+                rows="3"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              ></textarea>
+            </div>
+            <div>
+              <label
+                for="imagemURL"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >URL da Imagem</label
+              >
+              <input
+                type="url"
+                id="imagemURL"
+                name="imagemURL"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              />
+            </div>
+            <button
+              type="submit"
+              class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+            >
+              Adicionar Personagem
+            </button>
+          </form>
+        </div>
+
+        <!-- Formulário de Edição -->
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8 hidden"
+          id="form-edicao-container"
+        >
+          <h3 class="text-xl font-bold mb-4 dark:text-white">
+            Editar Personagem
+          </h3>
+          <form id="form-edicao" class="space-y-4">
+            <div>
+              <label
+                for="edit-nome"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Nome</label
+              >
+              <input
+                type="text"
+                id="edit-nome"
+                name="nome"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              />
+            </div>
+            <div>
+              <label
+                for="edit-descricao"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Descrição</label
+              >
+              <textarea
+                id="edit-descricao"
+                name="descricao"
+                rows="3"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              ></textarea>
+            </div>
+            <div>
+              <label
+                for="edit-imagemURL"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >URL da Imagem</label
+              >
+              <input
+                type="url"
+                id="edit-imagemURL"
+                name="imagemURL"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              />
+            </div>
+            <div class="flex space-x-4">
+              <button
+                type="submit"
+                class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+              >
+                Salvar Alterações
+              </button>
+              <button
+                type="button"
+                onclick="document.getElementById('form-edicao-container').classList.add('hidden')"
+                class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-primary-800"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Lista de Personagens -->
+        <div id="personagens-admin" class="space-y-4"></div>
+      </section>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin-manager.js"></script>
+  </body>
+</html>
