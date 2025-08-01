@@ -1,0 +1,21 @@
+{
+  "pages": [
+    {
+      "id": 1,
+      "numero": 1,
+      "imagem": "img/capa.png",
+      "titulo": "Introdução à Cinemática",
+      "personagens": ["Amélia", "Newton"],
+      "dialogos": [
+        {
+          "personagem": "Amélia",
+          "texto": "Olá, Newton! Estou muito animada para aprender sobre cinemática!"
+        },
+        {
+          "personagem": "Newton",
+          "texto": "Que bom, Amélia! Vamos começar com os conceitos básicos do movimento."
+        }
+      ]
+    }
+  ]
+} 

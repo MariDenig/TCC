@@ -1,0 +1,21 @@
+{
+    "capitulos": [
+        {
+            "id": 1,
+            "titulo": "O Mistério da Gravidade",
+            "descricao": "Amélia e Newton descobrem os segredos da gravidade em uma aventura emocionante.",
+            "paginas": [
+                {
+                    "numero": 1,
+                    "imagem": "img/hq/cap1-pag1.jpg",
+                    "texto": "Era uma manhã ensolarada quando Amélia e Newton decidiram explorar o parque..."
+                },
+                {
+                    "numero": 2,
+                    "imagem": "img/hq/cap1-pag2.jpg",
+                    "texto": "De repente, Newton pulou em uma árvore e ficou preso..."
+                }
+            ]
+        }
+    ]
+} 
