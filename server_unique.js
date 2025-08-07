@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 
 
-const { connectToDatabase, getDb } = require('./middleware/js/db.js'); // Importa a conexão
+const { connectToDatabase, getDb } = require('./js/db.js'); // Importa a conexão
 // Importar as rotas
 
 const Personagem = require('./models/personagem.model'); // Importa o modelo

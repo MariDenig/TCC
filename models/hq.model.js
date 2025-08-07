@@ -4,11 +4,11 @@ const fs = require('fs');
 const dbPath = path.resolve(__dirname, './db.js'); // Caminho absoluto para db.js
 
 if (fs.existsSync(dbPath)) {
-    var { getDb } = require('../middleware/js/db.js');
-} else if (fs.existsSync(path.resolve(__dirname, '../middleware/js/db.js'))) {
-    var { getDb } = require('../middleware/js/db.js');
+    var { getDb } = require('./db');
+} else if (fs.existsSync(path.resolve(__dirname, './js/db.js'))) {
+    var { getDb } = require('./js/db');
 }else { 
-  var { getDb } = require('../middleware/js/db.js');   
+  var { getDb } = require('../js/db');   
 }
 
 
