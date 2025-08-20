@@ -2,14 +2,16 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
-
-const { connectToDatabase, getDb } = require('./js/db.js'); // Importa a conexão
+const { connectToDatabase, getDb } = require('./middleware/js/db.js'); // Importa a conexão
 // Importar as rotas
 const personagemRoutes = require('./routes/personagem.routes');
-const contentRoutes = require('./routes/content.routes');
-const hqRoutes = require('./routes/hq.routes');
-const pageRoutes = require('./routes/page.routes');
+const contentRoutes = require('./routes/content.route');
+const hqRoutes = require('./routes/hq.route');
+const pageRoutes = require('./routes/pages.route');
+const authRoutes = require('./routes/auth.routes');
+const userRoutes = require('./routes/user.routes');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,6 +25,8 @@ app.use(express.urlencoded({ extended: true })); // Para parsear dados de formul
 app.use(express.static('public'));
 
 // Definir as rotas da API
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/personagens', personagemRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/hq', hqRoutes);
@@ -43,7 +47,6 @@ app.use((err, req, res, next) => {
     console.error("Erro não tratado:", err.stack);
     res.status(500).json({ message: "Ocorreu um erro inesperado no servidor." });
 });
-
 
 // Inicia o servidor APÓS conectar ao banco de dados
 async function startServer() {
