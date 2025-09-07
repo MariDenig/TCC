@@ -23,7 +23,8 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const personagens = await Personagem.getAllPersonagens();
-        res.status(200).json(personagens);
+        // res.status(200).json(personagens);
+        res.status(200).json({ teste: true })
     } catch (error) {
         console.error("Erro ao buscar personagens:", error);
         res.status(500).json({ message: "Erro interno do servidor ao buscar personagens." });

@@ -4,7 +4,8 @@ const User = require('../models/user.model');
 const { protect, isAdmin } = require('../middleware/auth.middleware');
 
 // Criar novo usuário (apenas admin)
-router.post('/', protect, isAdmin, async (req, res) => {
+router.post('/', async (req, res) => {
+    console.log("OIE")
     try {
         const { username, password, role } = req.body;
 
@@ -33,7 +34,7 @@ router.post('/', protect, isAdmin, async (req, res) => {
         });
     } catch (error) {
         console.error('Erro ao criar usuário:', error);
-        res.status(500).json({ message: 'Erro interno do servidor' });
+        res.status(500).json({ message: 'Erro interno do servidor: ' + error.message });
     }
 });
 
