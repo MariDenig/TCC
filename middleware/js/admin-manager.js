@@ -1,9 +1,9 @@
+
+
 // Função para carregar personagens
 async function carregarPersonagens() {
     try {
-        const response = await fetch('http://localhost:3000/api/personagens', {
-            headers: getAuthHeaders()
-        });
+        const response = await fetch('http://localhost:3000/api/personagens');
         if (!response.ok) throw new Error('Erro ao carregar personagens');
         const personagens = await response.json();
         exibirPersonagensAdmin(personagens);
@@ -46,9 +46,11 @@ async function criarPersonagem(event) {
     const dados = Object.fromEntries(formData.entries());
 
     try {
-        const response = await fetch('http://localhost:3000/api/personagens', {
+        const response = await fetch('http://localhost:5000/api/personagens', {
             method: 'POST',
-            headers: getAuthHeaders(),
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(dados)
         });
 
@@ -66,9 +68,7 @@ async function criarPersonagem(event) {
 // Função para editar personagem
 async function editarPersonagem(id) {
     try {
-        const response = await fetch(`http://localhost:3000/api/personagens/${id}`, {
-            headers: getAuthHeaders()
-        });
+        const response = await fetch(`http://localhost:5000/api/personagens/${id}`);
         if (!response.ok) throw new Error('Erro ao carregar dados do personagem');
         
         const personagem = await response.json();
@@ -87,10 +87,7 @@ function preencherFormularioEdicao(personagem) {
     form.nome.value = personagem.nome;
     form.descricao.value = personagem.descricao;
     form.imagemURL.value = personagem.imagemURL;
-    form.dataset.id = personagem._id;
-
-    // Mostrar o formulário de edição
-    document.getElementById('form-edicao-container').classList.remove('hidden');
+    form.dataset.id = personagem.id;
 }
 
 // Função para salvar edição
@@ -102,16 +99,17 @@ async function salvarEdicao(event) {
     const dados = Object.fromEntries(formData.entries());
 
     try {
-        const response = await fetch(`http://localhost:3000/api/personagens/${id}`, {
+        const response = await fetch(`http://localhost:5000/api/personagens/${id}`, {
             method: 'PUT',
-            headers: getAuthHeaders(),
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(dados)
         });
 
         if (!response.ok) throw new Error('Erro ao atualizar personagem');
         
         mostrarMensagemSucesso('Personagem atualizado com sucesso!');
-        document.getElementById('form-edicao-container').classList.add('hidden');
         await carregarPersonagens();
     } catch (error) {
         console.error('Erro:', error);
@@ -124,9 +122,8 @@ async function excluirPersonagem(id) {
     if (!confirm('Tem certeza que deseja excluir este personagem?')) return;
 
     try {
-        const response = await fetch(`http://localhost:3000/api/personagens/${id}`, {
-            method: 'DELETE',
-            headers: getAuthHeaders()
+        const response = await fetch(`http://localhost:5000/api/personagens/${id}`, {
+            method: 'DELETE'
         });
 
         if (!response.ok) throw new Error('Erro ao excluir personagem');

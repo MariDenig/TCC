@@ -91,45 +91,9 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tema.js"></script>
-    <script src="js/scroll.js"></script>
+    <script src="middleware/js/tema.js"></script>
+    <script src="middleware/js/scroll.js"></script>
     <script>
-        // Gerenciamento do tema
-        // const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        // const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-        // const themeToggleBtn = document.getElementById('theme-toggle');
-
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            themeToggleLightIcon.classList.remove('hidden');
-        } else {
-            document.documentElement.classList.remove('dark');
-            themeToggleDarkIcon.classList.remove('hidden');
-        }
-
-        themeToggleBtn.addEventListener('click', function() {
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
-
-            if (localStorage.getItem('color-theme')) {
-                if (localStorage.getItem('color-theme') === 'light') {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                }
-            } else {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                }
-            }
-        });
-
         // Script de cadastro
         const form = document.getElementById('registerForm');
         const msg = document.getElementById('msg');
@@ -148,7 +112,7 @@
             }
             const data = { nome, sobrenome, email, senha };
             try {
-                const res = await fetch('http://localhost:3000/api/users/register', {
+                const res = await fetch('http://localhost:5000/api/users/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)

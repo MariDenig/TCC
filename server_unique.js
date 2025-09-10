@@ -11,7 +11,7 @@ const Personagem = require('./models/personagem.model'); // Importa o modelo
 
 // CREATE: POST /api/personagens
 const router = express.Router();
-router.post('/api/personagens', async (req, res) => {
+router.post('/personagens', async (req, res) => {
     try {
         // req.body contém os dados enviados no corpo da requisição POST
         const novoPersonagemData = req.body;

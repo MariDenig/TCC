@@ -1,37 +1,22 @@
-const path = require('path');
-const fs = require('fs');
+const mongoose = require('mongoose');
 
-const dbPath = path.resolve(__dirname, './db.js'); // Caminho absoluto para db.js
+const pageSchema = new mongoose.Schema({}, { strict: false, timestamps: true, collection: 'pages' });
 
-if (fs.existsSync(dbPath)) {
-    var { getDb } = require('./db');
-} else if (fs.existsSync(path.resolve(__dirname, '../middleware/js/db.js'))) {
-    var { getDb } = require('../middleware/js/db.js');
-}else { 
-  var { getDb } = require('../middleware/js/db.js');   
-}
+const PageModel = mongoose.models.Page || mongoose.model('Page', pageSchema);
 
-
-
-const COLLECTION_NAME = 'pages';
-
-// CREATE
 async function createPage(pageData) {
-    const db = getDb();
     try {
-        const result = await db.collection(COLLECTION_NAME).insertOne(pageData);
-        return result; // Retorna o resultado da inserção, incluindo o insertedId
+        const created = await PageModel.create(pageData);
+        return { insertedId: created._id };
     } catch (error) {
         console.error("Erro ao criar página:", error);
         throw error;
     }
 }
 
-// READ (All)
 async function getAllPages() {
-    const db = getDb();
     try {
-        const pages = await db.collection(COLLECTION_NAME).find({}).toArray();
+        const pages = await PageModel.find({}).lean();
         return pages;
     } catch (error) {
         console.error("Erro ao buscar todas as páginas:", error);
@@ -39,14 +24,12 @@ async function getAllPages() {
     }
 }
 
-// READ (One by ID)
 async function getPageById(id) {
-    const db = getDb();
     try {
-        if (!ObjectId.isValid(id)) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
             return null;
         }
-        const page = await db.collection(COLLECTION_NAME).findOne({ _id: new ObjectId(id) });
+        const page = await PageModel.findById(id).lean();
         return page;
     } catch (error) {
         console.error(`Erro ao buscar página com ID ${id}:`, error);
@@ -54,35 +37,27 @@ async function getPageById(id) {
     }
 }
 
-// UPDATE (by ID)
 async function updatePage(id, updateData) {
-    const db = getDb();
     try {
-        if (!ObjectId.isValid(id)) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
             return null;
         }
-        delete updateData._id; // Não permitir atualização do _id
-
-        const result = await db.collection(COLLECTION_NAME).updateOne(
-            { _id: new ObjectId(id) },
-            { $set: updateData }
-        );
-        return result;
+        delete updateData._id;
+        const result = await PageModel.updateOne({ _id: id }, { $set: updateData });
+        return { matchedCount: result.matchedCount, modifiedCount: result.modifiedCount };
     } catch (error) {
         console.error(`Erro ao atualizar página com ID ${id}:`, error);
         throw error;
     }
 }
 
-// DELETE (by ID)
 async function deletePage(id) {
-    const db = getDb();
     try {
-        if (!ObjectId.isValid(id)) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
             return null;
         }
-        const result = await db.collection(COLLECTION_NAME).deleteOne({ _id: new ObjectId(id) });
-        return result;
+        const result = await PageModel.deleteOne({ _id: id });
+        return { deletedCount: result.deletedCount };
     } catch (error) {
         console.error(`Erro ao deletar página com ID ${id}:`, error);
         throw error;

@@ -1,25 +1,14 @@
-const path = require('path');
-const fs = require('fs');
-const { ObjectId } = require('mongodb'); 
+const mongoose = require('mongoose');
 
-const dbPath = path.resolve(__dirname, './db.js'); // Caminho absoluto para db.js
+const personagemSchema = new mongoose.Schema({}, { strict: false, timestamps: true, collection: 'personagens' });
 
-if (fs.existsSync(dbPath)) {
-    var { getDb } = require('./db');
-} else if (fs.existsSync(path.resolve(__dirname, './middleware/js/db.js'))) {
-    var { getDb } = require('../middleware/js/db.js');
-} else { 
-  var { getDb } = require('../middleware/js/db.js');   
-}
-
-const COLLECTION_NAME = 'personagens';
+const PersonagemModel = mongoose.models.Personagem || mongoose.model('Personagem', personagemSchema);
 
 // CREATE
 async function createPersonagem(personagemData) {
-    const db = getDb();
     try {
-        const result = await db.collection(COLLECTION_NAME).insertOne(personagemData);
-        return result; // Retorna o resultado da inserção, incluindo o insertedId
+        const created = await PersonagemModel.create(personagemData);
+        return { insertedId: created._id };
     } catch (error) {
         console.error("Erro ao criar personagem:", error);
         throw error;
@@ -28,9 +17,8 @@ async function createPersonagem(personagemData) {
 
 // READ (All)
 async function getAllPersonagens() {
-    const db = getDb();
     try {
-        const personagens = await db.collection(COLLECTION_NAME).find({}).toArray();
+        const personagens = await PersonagemModel.find({}).lean();
         return personagens;
     } catch (error) {
         console.error("Erro ao buscar todos os personagens:", error);
@@ -40,13 +28,11 @@ async function getAllPersonagens() {
 
 // READ (One by ID)
 async function getPersonagemById(id) {
-    const db = getDb();
     try {
-        // Validar se o ID é um ObjectId válido antes de consultar
-        if (!ObjectId.isValid(id)) {
-            return null; // Ou lançar um erro específico
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return null;
         }
-        const personagem = await db.collection(COLLECTION_NAME).findOne({ _id: new ObjectId(id) });
+        const personagem = await PersonagemModel.findById(id).lean();
         return personagem;
     } catch (error) {
         console.error(`Erro ao buscar personagem com ID ${id}:`, error);
@@ -56,19 +42,13 @@ async function getPersonagemById(id) {
 
 // UPDATE (by ID)
 async function updatePersonagem(id, updateData) {
-    const db = getDb();
     try {
-        if (!ObjectId.isValid(id)) {
-            return null; // Ou lançar um erro
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return null;
         }
-        // Remove o campo _id de updateData para evitar tentar modificar o _id
         delete updateData._id;
-
-        const result = await db.collection(COLLECTION_NAME).updateOne(
-            { _id: new ObjectId(id) },
-            { $set: updateData } // $set atualiza apenas os campos fornecidos
-        );
-        return result; // Retorna informações sobre a operação (matchedCount, modifiedCount)
+        const result = await PersonagemModel.updateOne({ _id: id }, { $set: updateData });
+        return { matchedCount: result.matchedCount, modifiedCount: result.modifiedCount };
     } catch (error) {
         console.error(`Erro ao atualizar personagem com ID ${id}:`, error);
         throw error;
@@ -77,13 +57,12 @@ async function updatePersonagem(id, updateData) {
 
 // DELETE (by ID)
 async function deletePersonagem(id) {
-    const db = getDb();
     try {
-        if (!ObjectId.isValid(id)) {
-            return null; // Ou lançar um erro
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return null;
         }
-        const result = await db.collection(COLLECTION_NAME).deleteOne({ _id: new ObjectId(id) });
-        return result; // Retorna informações sobre a operação (deletedCount)
+        const result = await PersonagemModel.deleteOne({ _id: id });
+        return { deletedCount: result.deletedCount };
     } catch (error) {
         console.error(`Erro ao deletar personagem com ID ${id}:`, error);
         throw error;
