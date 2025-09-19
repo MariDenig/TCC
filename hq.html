@@ -6,49 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HQ - Física Divertida</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            "50": "#f5f3ff",
+                            "100": "#ede9fe",
+                            "200": "#ddd6fe",
+                            "300": "#c4b5fd",
+                            "400": "#a78bfa",
+                            "500": "#8b5cf6",
+                            "600": "#7c3aed",
+                            "700": "#6d28d9",
+                            "800": "#5b21b6",
+                            "900": "#4c1d95",
+                            "950": "#2e1065"
+                        },
+                        secondary: {
+                            "50": "#eff6ff",
+                            "100": "#dbeafe",
+                            "200": "#bfdbfe",
+                            "300": "#93c5fd",
+                            "400": "#60a5fa",
+                            "500": "#3b82f6",
+                            "600": "#2563eb",
+                            "700": "#1d4ed8",
+                            "800": "#1e40af",
+                            "900": "#1e3a8a",
+                            "950": "#172554"
+                        },
+                        accent: {
+                            "50": "#fdf2f8",
+                            "100": "#fce7f3",
+                            "200": "#fbcfe8",
+                            "300": "#f9a8d4",
+                            "400": "#f472b6",
+                            "500": "#ec4899",
+                            "600": "#db2777",
+                            "700": "#be185d",
+                            "800": "#9d174d",
+                            "900": "#831843",
+                            "950": "#500724"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
-<body>
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+<body class="bg-gray-50 dark:bg-gray-900">
+    <nav class="fixed w-full z-20 top-0 start-0 bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="#" class="flex items-center">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Física Divertida</span>
-            </a>
-            <button data-collapse-toggle="navbar-default" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                aria-controls="navbar-default" aria-expanded="false">
-                <span class="sr-only">Abrir menu</span>
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 1h15M1 7h15M1 13h15" />
-                </svg>
-            </button>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul
-                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                        <a href="index.html"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Início</a>
-                    </li>
-                    <li>
-                        <a href="personagens.html"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Personagens</a>
-                    </li>
-                    <li>
-                        <a href="hq.html"
-                            class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                            aria-current="page">HQ</a>
-                    </li>
-                    <li>
-                        <a href="contato.html"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contato</a>
-                    </li>
-                </ul>
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="img/logopng.png" class="h-12" alt="Física Divertida Logo">
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Física Divertida</span>
+                </a>
+            </div>
+            <div class="flex items-center space-x-3 md:order-3">
+                <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
 
-    <section class="bg-white dark:bg-gray-900">
+    <section class="pt-32 bg-gradient-to-b from-primary-50 via-secondary-50 to-accent-50 dark:from-gray-900 dark:to-gray-800">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 História em Quadrinhos</h1>
@@ -57,46 +89,46 @@
         </div>
     </section>
 
-    <section class="bg-gray-50 dark:bg-gray-800">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
-            <div class="bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-700 dark:border-gray-600 p-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div>
+    <section class="bg-gradient-to-b from-accent-50 via-primary-50 to-secondary-50 dark:from-gray-800 dark:to-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-5xl lg:py-12">
+            <div class="bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-700 dark:border-gray-600 p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                    <div class="order-1 md:order-1 self-start">
+                        <img src="img/capa hq.jpg" alt="Capa da HQ" class="rounded-lg shadow-lg w-full h-auto object-contain">
+                    </div>
+                    <div class="order-2 md:order-2 self-start">
                         <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Física em Quadrinhos: Volume 1</h2>
                         <p class="text-gray-600 dark:text-gray-300 mb-6">
                             Neste primeiro volume, Amélia conhece Newton e juntos exploram os conceitos fundamentais da cinemática. 
-                            Através de situações do dia a dia e experimentos divertidos, eles descobrem:
+                            Através de situações do dia a dia e experimentos divertidos, eles descobrem.
                         </p>
-                        <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 mb-6">
-                            <li>Movimento Retilíneo Uniforme</li>
-                            <li>Aceleração e Velocidade</li>
-                            <li>Queda Livre</li>
-                            <li>Lançamento de Projéteis</li>
-                        </ul>
-                        <div class="flex flex-wrap gap-4">
+                        <div class="flex flex-wrap gap-3">
                             <a href="#" class="inline-flex items-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                                 Ler Online
                                 <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                                 </svg>
                             </a>
-                            <a href="#" class="inline-flex items-center px-5 py-3 text-base font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                            <a href="pdf/Planeta da Aurora_ vol.1.pdf" target="_blank" download class="inline-flex items-center px-5 py-3 text-base font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
                                 Baixar PDF
                                 <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path>
                                 </svg>
                             </a>
+                            <a href="chatbot pfc/index.html" class="inline-flex items-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
+                                Fazer Quiz
+                                <svg class="w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </a>
                         </div>
-                    </div>
-                    <div class="hidden md:block">
-                        <img src="img/hq-preview.png" alt="Preview da HQ" class="rounded-lg shadow-lg">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-white dark:bg-gray-900 py-16">
+    <section class="bg-gradient-to-b from-secondary-50 via-accent-50 to-primary-50 dark:from-gray-900 dark:to-gray-800 py-16">
         <div class="max-w-screen-xl mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 dark:text-white">Integrantes do Projeto</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -111,7 +143,7 @@
                     <p class="text-gray-600 dark:text-gray-300">Conteúdo e Pesquisa</p>
                 </div>
                 <div class="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 dark:border-gray-600 p-6 text-center">
-                    <img src="img/maria.jpg" alt="Maria Eduarda Sagava" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                    <img src="img/criadora1.jpg" alt="Maria Eduarda Sagava" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Maria Eduarda Sagava</h3>
                     <p class="text-gray-600 dark:text-gray-300">Arte e Ilustração</p>
                 </div>
@@ -119,7 +151,7 @@
         </div>
     </section>
 
-    <footer class="bg-white dark:bg-gray-900">
+    <footer class="bg-gradient-to-b from-primary-50 via-secondary-50 to-accent-50 dark:from-gray-800 dark:to-gray-900">
         <div class="max-w-screen-xl mx-auto px-4 py-8 md:py-16">
             <div class="text-center text-gray-600 dark:text-gray-400">
                 <p>&copy; 2024 Física Divertida. Todos os direitos reservados.</p>
@@ -128,13 +160,40 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const button = document.querySelector('[data-collapse-toggle="navbar-default"]');
-            const menu = document.getElementById('navbar-default');
+        // Gerenciamento do tema (igual ao index)
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        const themeToggleBtn = document.getElementById('theme-toggle');
 
-            button.addEventListener('click', function () {
-                menu.classList.toggle('hidden');
-            });
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleLightIcon?.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggleDarkIcon?.classList.remove('hidden');
+        }
+
+        themeToggleBtn?.addEventListener('click', function() {
+            themeToggleDarkIcon?.classList.toggle('hidden');
+            themeToggleLightIcon?.classList.toggle('hidden');
+
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
         });
     </script>
 </body>
