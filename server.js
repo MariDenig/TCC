@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { connectToDatabase } = require('./middleware/js/db');
+const path = require('path');
+const jwt = require('jsonwebtoken');
 
 
 
@@ -361,6 +363,48 @@ app.use(router);
 app.use('/api/users', userRoutes);
 // Servir arquivos estáticos da pasta 'public' (para seu frontend)
 app.use(express.static('public'));
+
+// Middleware simples para validar token JWT (lê de Authorization: Bearer ou query ?token=)
+function verifyJwt(req, res, next) {
+    try {
+        let token = null;
+        const auth = req.headers['authorization'] || '';
+        if (auth.startsWith('Bearer ')) token = auth.substring('Bearer '.length).trim();
+        if (!token && req.query && req.query.token) token = String(req.query.token);
+        if (!token) return res.status(401).json({ message: 'Não autenticado' });
+        const secret = process.env.JWT_SECRET || 'seu_jwt_secret_aqui_123456789';
+        const decoded = jwt.verify(token, secret);
+        req.user = decoded;
+        return next();
+    } catch (e) {
+        return res.status(401).json({ message: 'Token inválido ou expirado' });
+    }
+}
+
+// Rota protegida para download de PDF da pasta /pdf
+app.get('/api/download/pdf', verifyJwt, (req, res) => {
+    try {
+        const file = String(req.query.file || '');
+        if (!file || !file.toLowerCase().endsWith('.pdf')) {
+            return res.status(400).json({ message: 'Arquivo inválido' });
+        }
+        // Evita path traversal
+        if (file.includes('..') || file.includes('/') || file.includes('\\')) {
+            return res.status(400).json({ message: 'Caminho inválido' });
+        }
+        const pdfDir = path.join(__dirname, 'pdf');
+        const absPath = path.join(pdfDir, file);
+        return res.sendFile(absPath, (err) => {
+            if (err) {
+                console.error('Erro ao enviar PDF:', err);
+                return res.status(404).json({ message: 'Arquivo não encontrado' });
+            }
+        });
+    } catch (error) {
+        console.error('Erro no download de PDF:', error);
+        return res.status(500).json({ message: 'Erro interno no download' });
+    }
+});
 
 
 

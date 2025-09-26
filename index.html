@@ -215,7 +215,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                                     </svg>
                                 </a>
-                                <a href="pdf/Planeta da Aurora_ vol.1.pdf" target="_blank" download class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                                <a href="#" data-pdf-file="Planeta da Aurora_ vol.1.pdf" data-require-auth="true" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900 transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
                                     Baixar PDF
                                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -326,6 +326,28 @@
         </div>
     </footer>
 
+    <!-- Modal de Login Inline -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-sm p-6">
+            <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Fazer login</h3>
+            <div class="space-y-4">
+                <div>
+                    <label for="login-email" class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                    <input id="login-email" type="email" class="w-full p-2 rounded border dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="seu@email.com">
+                </div>
+                <div>
+                    <label for="login-senha" class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Senha</label>
+                    <input id="login-senha" type="password" class="w-full p-2 rounded border dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="******">
+                </div>
+                <div class="flex gap-2 justify-end">
+                    <button id="login-cancel" class="px-4 py-2 rounded border dark:border-gray-600 text-gray-700 dark:text-gray-200">Cancelar</button>
+                    <button id="login-submit" class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">Entrar</button>
+                </div>
+                <p id="login-error" class="text-sm text-red-600 hidden">E-mail ou senha inválidos.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Gerenciamento do tema
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -381,6 +403,75 @@
 
         button?.addEventListener('click', function () {
                 menu.classList.toggle('hidden');
+        });
+
+        // Exigir autenticação para downloads marcados
+        const API_BASE = 'http://localhost:5000';
+        let pendingDownloadFile = null;
+
+        function openLoginModal() {
+            document.getElementById('login-error').classList.add('hidden');
+            document.getElementById('login-email').value = '';
+            document.getElementById('login-senha').value = '';
+            const modal = document.getElementById('login-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => document.getElementById('login-email').focus(), 0);
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        async function performLoginAndDownload() {
+            const email = document.getElementById('login-email').value.trim();
+            const senha = document.getElementById('login-senha').value;
+            if (!email || !senha) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/users/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, senha })
+                });
+                const result = await res.json().catch(() => ({}));
+                if (res.ok && result.token) {
+                    localStorage.setItem('token', result.token);
+                    closeLoginModal();
+                    if (pendingDownloadFile) {
+                        const url = `${API_BASE}/api/download/pdf?file=${encodeURIComponent(pendingDownloadFile)}&token=${encodeURIComponent(result.token)}`;
+                        window.open(url, '_blank');
+                        pendingDownloadFile = null;
+                    }
+                } else {
+                    document.getElementById('login-error').classList.remove('hidden');
+                }
+            } catch (_) {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        document.getElementById('login-cancel').addEventListener('click', closeLoginModal);
+        document.getElementById('login-submit').addEventListener('click', performLoginAndDownload);
+        document.getElementById('login-senha').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performLoginAndDownload();
+        });
+        document.querySelectorAll('[data-require-auth="true"]').forEach((el) => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const token = localStorage.getItem('token');
+                const file = el.getAttribute('data-pdf-file');
+                if (!token) {
+                    pendingDownloadFile = file;
+                    openLoginModal();
+                    return;
+                }
+                if (file) {
+                    const url = `${API_BASE}/api/download/pdf?file=${encodeURIComponent(file)}&token=${encodeURIComponent(token)}`;
+                    window.open(url, '_blank');
+                }
+            });
         });
     </script>
 </body>

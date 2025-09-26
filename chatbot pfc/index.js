@@ -21,6 +21,65 @@ const currentSessionId = `sessao_${Date.now()}_${Math.random().toString(36).subs
 const chatStartTime = new Date();
 const BOT_ID = "PhysicsGenius_v1";
 
+// --- Utilitários de Resiliência para a API Gemini ---
+const MAX_GEMINI_RETRIES = 3; // tentativas totais após a primeira
+const BASE_BACKOFF_MS = 1500; // base para backoff exponencial
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function isRateLimitError(err) {
+	const status = err?.status || err?.cause?.status || err?.response?.status;
+	const msg = (err?.message || "").toLowerCase();
+	return status === 429 || msg.includes("429") || msg.includes("quota") || msg.includes("rate limit") || msg.includes("exceeded");
+}
+
+function getRetryAfterMsFromError(err) {
+	// Tenta extrair Retry-After em segundos, ou tempo sugerido na mensagem
+	try {
+		const headers = err?.response?.headers || err?.cause?.response?.headers;
+		if (headers && typeof headers.get === 'function') {
+			const retryAfter = headers.get('Retry-After');
+			if (retryAfter) {
+				const seconds = parseFloat(retryAfter);
+				if (!Number.isNaN(seconds) && seconds > 0) return Math.ceil(seconds * 1000);
+			}
+		}
+		const msg = String(err?.message || "");
+		const m = msg.match(/retry\s+in\s+([0-9]+(?:\.[0-9]+)?)s/i);
+		if (m && m[1]) {
+			const seconds = parseFloat(m[1]);
+			if (!Number.isNaN(seconds) && seconds > 0) return Math.ceil(seconds * 1000);
+		}
+	} catch (_) { /* ignora */ }
+	return 0;
+}
+
+async function sendGeminiWithRetry(chat, prompt) {
+	let attempt = 0;
+	while (true) {
+		try {
+			return await chat.sendMessage(prompt);
+		} catch (err) {
+			if (!isRateLimitError(err) || attempt >= MAX_GEMINI_RETRIES) {
+				throw err;
+			}
+			// calcula espera usando Retry-After quando disponível; senão backoff exponencial + jitter
+			let waitMs = getRetryAfterMsFromError(err);
+			if (!waitMs || waitMs <= 0) {
+				const jitter = Math.floor(Math.random() * 400);
+				waitMs = Math.min(20000, BASE_BACKOFF_MS * Math.pow(2, attempt) + jitter);
+			}
+			if (attempt === 0) {
+				addMessageToUI("Limite de uso atingido. Tentando novamente em instantes...", 'bot');
+			}
+			await sleep(waitMs);
+			attempt++;
+		}
+	}
+}
+
 // --- Banco de Perguntas do Quiz ---
 const quizQuestions = [
     {
@@ -284,13 +343,13 @@ async function sendMessage(userInput) {
 
 Como posso ajudar você hoje?`;
                          } else {
-                 // Usar a API do Gemini para respostas gerais
-                 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-                 const chat = model.startChat({ history: chatHistory.slice(0, -1) });
-                 
-                 const prompt = `Você é um assistente de física em português brasileiro. Responda sempre em português brasileiro de forma clara e didática. Pergunta do usuário: ${userInput}`;
-                 const result = await chat.sendMessage(prompt);
-                 botResponse = result.response.text();
+                // Usar a API do Gemini para respostas gerais (com retry/backoff)
+                const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+                const chat = model.startChat({ history: chatHistory.slice(0, -1) });
+
+                const prompt = `Você é um assistente de física em português brasileiro. Responda sempre em português brasileiro de forma clara e didática. Pergunta do usuário: ${userInput}`;
+                const result = await sendGeminiWithRetry(chat, prompt);
+                botResponse = result.response.text();
              }
             
             if (botResponse) {
